@@ -62,6 +62,10 @@ window.MockData = (() => {
     { id:'u9', name:'小林 翔太', email:'kobayashi@example.com', roles:['vice_exec_2'], department:'渉外', year: 2 },
     { id:'u10', name:'加藤 雅人', email:'kato@example.com', roles:['chairman'], department:'厚生', year: 4 },
     { id:'u11', name:'吉田 管理', email:'yoshida@example.com', roles:['admin', 'responsible'], department:'福祉', year: 4 },
+    { id:'u12', name:'佐々木 優', email:'sasaki@example.com', roles:['creator'], department:'広報', year: 2 },
+    { id:'u13', name:'木村 健太', email:'kimura@example.com', roles:['creator'], department:'企画', year: 1 },
+    { id:'u14', name:'清水 葵', email:'shimizu@example.com', roles:['responsible'], department:'総務', year: 3 },
+    { id:'u15', name:'山口 達也', email:'yamaguchi@example.com', roles:['admin'], department:'企画', year: 4 }
   ];
 
   const now = new Date();
@@ -380,7 +384,11 @@ window.MockData = (() => {
     'u8': { year: 2, department: '財務', recentWorks: ['決算報告書', '予算配分表'], delayRate: 0 },
     'u9': { year: 2, department: '渉外', recentWorks: ['外部提携資料', '挨拶状'], delayRate: 3 },
     'u10': { year: 4, department: '厚生', recentWorks: ['学内美化計画', '備品リスト'], delayRate: 0 },
-    'u11': { year: 4, department: '福祉', recentWorks: ['交流イベント資料'], delayRate: 0 }
+    'u11': { year: 4, department: '福祉', recentWorks: ['交流イベント資料'], delayRate: 0 },
+    'u12': { year: 2, department: '広報', recentWorks: ['団体紹介パンフレット'], delayRate: 0 },
+    'u13': { year: 1, department: '企画', recentWorks: ['学内アンケート作成'], delayRate: 0 },
+    'u14': { year: 3, department: '総務', recentWorks: ['備品管理規則改定'], delayRate: 0 },
+    'u15': { year: 4, department: '企画', recentWorks: ['年間予算マスター'], delayRate: 0 }
   };
 
   if (savedData) {

@@ -3,7 +3,7 @@
    ======================================== */
 window.MockData = (() => {
   // ─── 永続化ロジック ─────────────────
-  const STORAGE_KEY = 'checkflow_mock_data_v2';
+  const STORAGE_KEY = 'checkflow_mock_data_v3';
 
   // 日付のシリアライズ・デシリアライズ補助
   function reviver(key, value) {

@@ -38,7 +38,6 @@ window.MockData = (() => {
     { name: '夏企画', color: '#F59E0B' }
   ];
 
-
   function loadData() {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (!saved) return null;
@@ -67,6 +66,76 @@ window.MockData = (() => {
 
   const now = new Date();
   const day = 864e5;
+
+  let comments = [
+    {
+      id: 'c1',
+      appId: 'app1',
+      userId: 'u3',
+      text: '全体の色調をもっと明るい夏らしい青と黄色に調整してください。',
+      createdAt: new Date(now - 4*day),
+      type: 'comment'
+    },
+    {
+      id: 'c2',
+      appId: 'app1',
+      userId: 'u1',
+      text: '了解しました。CMYK比率を調整し、黄色を強調したデザインに更新しました。',
+      createdAt: new Date(now - 2*day),
+      type: 'comment'
+    },
+    {
+      id: 'c3',
+      appId: 'app1',
+      userId: 'u3',
+      text: '確認しました。こちらで問題ありません。承認します。',
+      createdAt: new Date(now - 1*day),
+      type: 'approval'
+    },
+    {
+      id: 'c4',
+      appId: 'app2',
+      userId: 'u11',
+      text: '予算の割り当て項目が一部不明瞭です。詳細を記載してください。',
+      createdAt: new Date(now - 6*day),
+      type: 'comment'
+    },
+    {
+      id: 'c5',
+      appId: 'app7',
+      userId: 'u3',
+      text: 'フォントサイズが小さすぎて看板として目立ちません。タイトルの文字サイズを2倍にしてください。',
+      createdAt: new Date(now - 9*day),
+      type: 'rejection'
+    }
+  ];
+
+  let notifications = [
+    {
+      id: 'n1',
+      userId: 'u1',
+      text: '山田 健一さんが「夏祭りポスターデザイン」を承認しました。次のステップへ進みます。',
+      appId: 'app1',
+      read: false,
+      createdAt: new Date(now - 1*day)
+    },
+    {
+      id: 'n2',
+      userId: 'u1',
+      text: '「新歓一会用立て看板」が差し戻されました。コメントを確認してください。',
+      appId: 'app7',
+      read: false,
+      createdAt: new Date(now - 9*day)
+    },
+    {
+      id: 'n3',
+      userId: 'u2',
+      text: '「予算状況報告書」が最終承認されました。',
+      appId: 'app10',
+      read: true,
+      createdAt: new Date(now - 12*day)
+    }
+  ];
 
   let applications = [
     {
@@ -111,10 +180,113 @@ window.MockData = (() => {
       currentStepIndex:4, description:'学内大掃除の告知。',
       files:[],
       versions:[],
+    },
+    {
+      id:'app5', title:'夏合宿実施計画書', category:'document',
+      tags:['予算関連', '夏企画', '重要'], requesterId:null,
+      isFestivalRelated:false, status:'pending', creatorId:'u2',
+      createdAt:new Date(now - 1*day), deadline:new Date(now + 10*day),
+      currentStepIndex:0, description:'夏合宿の計画書及び予算書。',
+      files:[],
+      versions:[],
+    },
+    {
+      id:'app6', title:'学園祭パンフレット表紙デザイン', category:'promotional',
+      tags:['大祭関連', '広報物', '重要', '急ぎ'], requesterId:null,
+      isFestivalRelated:true, status:'in_review', creatorId:'u1',
+      createdAt:new Date(now - 3*day), deadline:new Date(now + 2*day),
+      currentStepIndex:2, description:'学園祭公式パンフレットの表紙デザイン案。',
+      files:[
+        {id:'f2',name:'pamphlet_cover_v1.pdf',type:'edit',size:7500000,version:1,uploadedAt:new Date(now-3*day)},
+      ],
+      versions:[
+        {version:1,uploadedAt:new Date(now-3*day),uploadedBy:'u1',note:'初稿提出'},
+      ],
+    },
+    {
+      id:'app7', title:'新入生歓迎会用立て看板', category:'promotional',
+      tags:['春企画', '広報物'], requesterId:null,
+      isFestivalRelated:false, status:'rejected', creatorId:'u1',
+      createdAt:new Date(now - 10*day), deadline:new Date(now - 2*day),
+      currentStepIndex:1, description:'新入生歓迎イベントの立て看板デザイン。',
+      files:[
+        {id:'f3',name:'welcome_board.ai',type:'edit',size:5200000,version:1,uploadedAt:new Date(now-10*day)},
+      ],
+      versions:[
+        {version:1,uploadedAt:new Date(now-10*day),uploadedBy:'u1',note:'初稿提出'},
+      ],
+    },
+    {
+      id:'app8', title:'外部協力申請書', category:'document',
+      tags:['学外協力', '重要'], requesterId:null,
+      isFestivalRelated:false, status:'in_review', creatorId:'u2',
+      createdAt:new Date(now - 8*day), deadline:new Date(now + 1*day),
+      currentStepIndex:1, description:'地域連携イベントに関する協力申請。',
+      files:[],
+      versions:[],
+    },
+    {
+      id:'app9', title:'大祭用案内マップ', category:'promotional',
+      tags:['大祭関連', '広報物'], requesterId:null,
+      isFestivalRelated:true, status:'pending', creatorId:'u1',
+      createdAt:new Date(now - 2*day), deadline:new Date(now + 6*day),
+      currentStepIndex:0, description:'大祭会場内の案内図。',
+      files:[],
+      versions:[],
+    },
+    {
+      id:'app10', title:'予算状況報告書', category:'document',
+      tags:['予算関連'], requesterId:null,
+      isFestivalRelated:false, status:'completed', creatorId:'u2',
+      createdAt:new Date(now - 20*day), deadline:new Date(now - 10*day),
+      completedAt:new Date(now - 12*day), // 期限内
+      currentStepIndex:4, description:'第1四半期の予算執行状況。',
+      files:[],
+      versions:[],
     }
   ];
 
-  let tasks = []; // 追加
+  let tasks = [
+    {
+      id: 't1',
+      title: '大祭パンフレットの表紙作成',
+      category: 'promotional',
+      status: 'requested',
+      requesterId: 'u3',
+      assigneeId: 'u1',
+      createdAt: new Date(now - 2*day),
+      deadline: '2026-07-15',
+      tags: ['大祭関連', '広報物', '重要'],
+      specifications: {
+        projectInfo: {
+          fields: [
+            { id: 'p1', label: '企画名', type: 'text', defaultValue: '' },
+            { id: 'p2', label: '開催目的', type: 'textarea', defaultValue: '' },
+            { id: 'p3', label: '企画概要', type: 'textarea', defaultValue: '' }
+          ],
+          values: {
+            p1: '秋の大祭2026',
+            p2: '大学祭全体の広報・集客',
+            p3: '大祭のプログラムや出店マップが記載された冊子。'
+          },
+          mediaType: 'print',
+          size: 'A4',
+          todo: '表紙として映える鮮やかなビジュアルをお願いします。ロゴは必ず中央上部に配置してください。'
+        },
+        designInfo: {
+          cmyk: { bg: {c:0,m:0,y:0,k:3}, title: {c:0,m:12,y:50,k:2}, text: {c:75,m:47,y:0,k:68}, main: {c:240,m:179,y:28,k:0}, glow: {c:10,m:5,y:85,k:0}, shadow: {c:80,m:40,y:15,k:0} },
+          rgb: { bg: {r:245,g:245,b:240}, title: {r:250,g:219,b:124}, text: {r:20,g:43,b:81}, main: {r:240,g:179,b:28}, glow: {r:239,g:227,b:49}, shadow: {r:31,g:127,b:178} },
+          fonts: { 
+            main: { name: 'しっぽり明朝', link: '' }, 
+            text: { name: 'しっぽり明朝', link: '' }, 
+            title: { name: '装甲明朝', link: '' } 
+          },
+          labels: { bg: '背景色', title: 'メインタイトル', text: '本文 / その他', main: '主要グラフィック', glow: 'アクセント', shadow: '影/ベース' }
+        },
+        references: []
+      }
+    }
+  ];
 
   let taskPresets = [
     {
